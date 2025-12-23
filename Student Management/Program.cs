@@ -25,7 +25,7 @@ namespace Student_Management
                 
                
                 //===========================================================================
-                Console.Write("Enter number of opration : ");
+                Console.Write("Enter number of operation : ");
                 
                
                 
@@ -39,7 +39,7 @@ namespace Student_Management
                     int sId = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("please Enter the name student ");
                     string? sName = Console.ReadLine();
-                    Console.WriteLine("Ener your age : ");
+                    Console.WriteLine("Enter your age : ");
                     int sAge = Convert.ToInt32(Console.ReadLine());
                     Student s = new Student(sId, sName, sAge);
                     manager.AddStudent(s);
@@ -52,7 +52,7 @@ namespace Student_Management
                     int instId = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("please Enter the name Instructor ");
                     string? instName = Console.ReadLine();
-                    Console.WriteLine("Ener your Specialization : ");
+                    Console.WriteLine("Enter your Specialization : ");
                     string? special = Console.ReadLine();
                     Instructor s = new Instructor(instId, instName, special);
                     manager.AddInstructor(s);
@@ -150,193 +150,6 @@ namespace Student_Management
 
         }
     }
-    
-
-   class Student
-{
-   public int StudentId;
-
-   public string Name;
-   public int Age;
-   public List<Course> Courses = new List<Course>();
-
-    public Student(int studentId, string name, int age )
-    {
-        StudentId = studentId;
-        Name = name;
-        Age = age;
-       
-    }
-
-   public bool Enroll(Course course)
-    {
-        Courses.Add(course);
-        return true;
-
-    }
-   public string PrintDetails() 
-    {
-        return $"Student ID: {StudentId}, Name: {Name}, Age: {Age}, Number of the courses: {Courses.Count}";
-    }
-}
-
-
-class Instructor
-{
-   public int InstructorId;
-    string Name;
-    string Specialization;
-
-    public Instructor(int instructorId, string name, string specialization)
-    {
-        InstructorId = instructorId;
-        Name = name;
-        Specialization = specialization;
-    }
-
-    public string PrintDetails() 
-    {
-        return $" InstructorId :{InstructorId} , Name :{Name} ,Specialization :{Specialization} ";
-    }
-}
-class Course
-{
-   public int CourseId;
-    public string Title;
-    Instructor Instructor;
-
-    public Course(int courseId, string title, Instructor instructor)
-    {
-        CourseId = courseId;
-        Title = title;
-        Instructor = instructor;
-    }
-
-    public string PrintDetails()
-    {
-        return $"CourseId : {CourseId} , Title : {Title}\n ,Instructor {Instructor.PrintDetails()}";// \nننزل سطر ونطبع تفاصيل المدرب 
-    }
-}
-class StudentManger
-{
-    List<Student> Students = new List<Student>();
-    List<Course> Courses = new List<Course>();
-    List<Instructor> Instructors = new List<Instructor>();
-    public bool AddStudent(Student student)
-    {
-        Students.Add(student);
-        return true;
-    }
-    public bool AddCourse(Course course)
-    {
-        Courses.Add(course);
-
-        return true;
-    }
-    public bool AddInstructor(Instructor instructor)
-    {
-        Instructors.Add(instructor);
-        return true;
-    }
-    public void ShowAllStudents()
-    {
-        if (Students.Count == 0)
-        {
-            Console.WriteLine("No students found.");
-            return;
-
-        }
-        Console.WriteLine("=== All Students ===");
-        for (int i = 0; i < Students.Count; i++)
-        {
-            Console.WriteLine(Students[i].PrintDetails());
-        }
-    }
-    public void ShowAllCourses()
-    {
-        if (Courses.Count == 0)
-        {
-            Console.WriteLine("No courses found.");
-            
-        }
-
-        Console.WriteLine("=== All Courses ===");
-        for (int i = 0; i < Courses.Count; i++)
-        {
-            Console.WriteLine(Courses[i].PrintDetails());
-        }
-    }
-    public void ShowAllInstructor()
-    {
-        if (Instructors.Count == 0)
-        {
-            Console.WriteLine("No instrutor found. ");
-        }
-        Console.WriteLine("=== All Instrutor ===");
-        for (int i = 0; i < Instructors.Count; i++)
-        {
-            Console.WriteLine(Instructors[i].PrintDetails());
-        }
-    }
-   public Student? FindStudent(int studentId)
-    {
-
-        for (int i = 0; i < Students.Count; i++)
-        {
-            if (Students[i].StudentId == studentId)
-            {
-
-                return Students[i];
-            }
-
-
-        }
-
-        return null;
-    }
-
-
-  public  Course? FindCourse(int courseId)
-    {
-        for (int i = 0; i < Courses.Count; i++)
-        {
-            if (Courses[i].CourseId == courseId)
-            {
-
-                return Courses[i];
-            }
-
-
-        }
-
-        return null;
-
-    }
-   public Instructor? FindInstructor(int instructorId)
-    {
-        for (int i = 0; i < Instructors.Count; i++)
-        {
-            if (Instructors[i].InstructorId == instructorId)
-            {
-                return Instructors[i];
-            }
-        }
-        return null;
-    }
-  public  bool EnrollStudentInCourse(int studentId, int courseId)
-    {
-      Student? x=  FindStudent(studentId);//Studentالواحد ضاع في افكاره لحد معرف نوع الداتا تيب هبقي 
-        Course? y=   FindCourse(courseId);
-        if (x  == null|| y  == null)
-        {
-            return false;
-        }
-      
-
-        return x.Enroll(y); 
-    }
-
-}
 
 
 
